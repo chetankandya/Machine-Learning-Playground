@@ -1,0 +1,35 @@
+missclass=function(X,X1){
+  n=length(X)
+  return(1-sum(diag(table(X,X1)))/n)
+}
+
+
+data = read.csv("pima-indians-diabetes.csv", header=FALSE)
+
+
+data = subset(data, select= -c(V1,V3,V4,V5,V6,V7))
+
+
+plot(data$V8, data$V2, col=ifelse( data$V9 == 1 ,"red", "blue") )
+
+# No it is not easaly classified, there is no clear deviding line
+
+Model <- glm(V9~V2+V8, data=data)
+
+fit = fitted(Model, data)
+
+above = as.integer(fit>0.5)
+
+missclass(data$V9, above)
+table(data$V9, above)
+summary.glm(Model)
+
+
+# P(D|G) = P(D And G) * P(G) = (P(G|D) * P(D))/ P(G)
+# P(D|A) =
+
+# Y = 0.4387(x1) + 0.78(x2)
+#plot(data$V8, data$V2, col=ifelse( above == 1 ,"yellow", "blue"))
+abline(fit)
+
+

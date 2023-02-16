@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1636726664834.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3028056550",
+    "id" : "1A90F3D0",
+    "lastKnownWriteTime" : 1636726439,
+    "last_content_update" : 1636726439,
+    "path" : "~/current/tdde01-machine-learning-2021/lab1/assignment1.r",
+    "project_path" : "assignment1.r",
+    "properties" : {
+        "cursorPosition" : "24,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

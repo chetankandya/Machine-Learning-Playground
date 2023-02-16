@@ -1,0 +1,50 @@
+library(kknn)
+missclass=function(X,X1){
+  n=length(X)
+  return(1-sum(diag(table(X,X1)))/n)
+}
+
+data = read.csv("optdigits.csv", header=FALSE)
+data$V65 <- as.factor(data$V65)
+
+n = dim(data)[1]
+set.seed(12345)
+id=sample(1:n, floor(n*0.5))
+train=data[id,]
+id1=setdiff(1:n, id)
+set.seed(12345)
+id2=sample(id1, floor(n*0.25))
+valid=data[id2,]
+id3=setdiff(id1,id2)
+test=data[id3,]
+
+
+Model = kknn(V65~., train, train, k = 30, kernel = "rectangular")
+fit = fitted(Model)
+table(train$V65, fit)
+missclass(train$V65, fit)
+
+
+Model = kknn(V65~., test, test, k = 30, kernel = "rectangular")
+fit = fitted(Model)
+table(test$V65, fit)
+missclass(test$V65, fit)
+
+
+predictions = predict(Model, type="prob")
+
+predictions_of_eights = predictions[,8+1][test$V65==8]
+
+sorted_predictions_of_eights = order(predictions_of_eights)
+values <- tail(sorted_predictions_of_eights, n=2)
+values <- append(values, head(sorted_predictions_of_eights, n=3))
+
+print(values)
+for (value in values)
+{
+  print(value)
+  print(predictions_of_eights[value])
+  d <- matrix(unlist(test[test$V65==8,][value,1:64]), nrow = 8, ncol=8, byrow = TRUE)
+  heatmap(d, Colv=NA, Rowv=NA)
+  line <- readline()
+}

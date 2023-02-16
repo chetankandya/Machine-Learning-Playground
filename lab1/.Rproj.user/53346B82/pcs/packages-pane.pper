@@ -1,0 +1,7 @@
+{
+    "installOptions" : {
+        "installDependencies" : true,
+        "installFromRepository" : true,
+        "libraryPath" : "\\\\ad.liu.se/home/rasry945/R/win-library/4.0"
+    }
+}
